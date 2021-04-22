@@ -3,48 +3,49 @@ import time
 
 
 class Car:
-    # Tire-Pins
-    IN1 = 20  # Linke Reifenseite nach vorne
-    IN2 = 21  # Linke Reifenseite nach hinten
-    IN3 = 19  # Rechte Reifenseite nach vorne
-    IN4 = 26  # Rechte Reifenseite nach hinten
-    ENA = 16
-    ENB = 13
-    # LED-Pins
-    LED_R = 22
-    LED_G = 27
-    LED_B = 24
-    # Servo-Pins
-    servoPIN1 = 23
-    servoPIN2 = 11
-    servoPIN3 = 9
-    # Buzzer-Pin
-    buzzer = 8
-    # GPIO-setup
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setwarnings(False)
-    GPIO.setup(IN1, GPIO.OUT)
-    GPIO.setup(IN2, GPIO.OUT)
-    GPIO.setup(IN3, GPIO.OUT)
-    GPIO.setup(IN4, GPIO.OUT)
-    GPIO.setup(ENA, GPIO.OUT)
-    GPIO.setup(ENB, GPIO.OUT)
-    GPIO.setup(LED_R, GPIO.OUT)
-    GPIO.setup(LED_G, GPIO.OUT)
-    GPIO.setup(LED_B, GPIO.OUT)
-    GPIO.setup(servoPIN1, GPIO.OUT)
-    GPIO.setup(servoPIN2, GPIO.OUT)
-    GPIO.setup(servoPIN3, GPIO.OUT)
-    GPIO.setup(buzzer, GPIO.OUT)
-    GPIO.output(ENA, GPIO.HIGH)
-    GPIO.output(ENB, GPIO.HIGH)
-    ENA_PWM = GPIO.PWM(ENA, 2000)
-    ENB_PWM = GPIO.PWM(ENB, 2000)
-    servo1 = GPIO.PWM(servoPIN1, 50)
-    servo2 = GPIO.PWM(servoPIN2, 50)
-    servo3 = GPIO.PWM(servoPIN3, 50)
-    ENA_PWM.start(0)
-    ENB_PWM.start(0)
+    def __init__(self):
+        # Tire-Pins
+        self.IN1 = 20  # Linke Reifenseite nach vorne
+        self.IN2 = 21  # Linke Reifenseite nach hinten
+        self.IN3 = 19  # Rechte Reifenseite nach vorne
+        self.IN4 = 26  # Rechte Reifenseite nach hinten
+        self.ENA = 16
+        self.ENB = 13
+        # LED-Pins
+        self.LED_R = 22
+        self.LED_G = 27
+        self.LED_B = 24
+        # Servo-Pins
+        self.servoPIN1 = 23
+        self.servoPIN2 = 11
+        self.servoPIN3 = 9
+        # Buzzer-Pin
+        buzzer = 8
+        # GPIO-setup
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
+        GPIO.setup(self.IN1, GPIO.OUT)
+        GPIO.setup(self.IN2, GPIO.OUT)
+        GPIO.setup(self.IN3, GPIO.OUT)
+        GPIO.setup(self.IN4, GPIO.OUT)
+        GPIO.setup(self.ENA, GPIO.OUT)
+        GPIO.setup(self.ENB, GPIO.OUT)
+        GPIO.setup(self.LED_R, GPIO.OUT)
+        GPIO.setup(self.LED_G, GPIO.OUT)
+        GPIO.setup(self.LED_B, GPIO.OUT)
+        GPIO.setup(self.servoPIN1, GPIO.OUT)
+        GPIO.setup(self.servoPIN2, GPIO.OUT)
+        GPIO.setup(self.servoPIN3, GPIO.OUT)
+        GPIO.setup(buzzer, GPIO.OUT)
+        GPIO.output(self.ENA, GPIO.HIGH)
+        GPIO.output(self.ENB, GPIO.HIGH)
+        ENA_PWM = GPIO.PWM(self.ENA, 2000)
+        ENB_PWM = GPIO.PWM(self.ENB, 2000)
+        servo1 = GPIO.PWM(self.servoPIN1, 50)
+        servo2 = GPIO.PWM(self.servoPIN2, 50)
+        servo3 = GPIO.PWM(self.servoPIN3, 50)
+        ENA_PWM.start(0)
+        ENB_PWM.start(0)
 
     def run(self, speed=20):
         GPIO.output(self.IN1, GPIO.HIGH)
