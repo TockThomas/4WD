@@ -39,13 +39,13 @@ class Car:
         GPIO.setup(buzzer, GPIO.OUT)
         GPIO.output(self.ENA, GPIO.HIGH)
         GPIO.output(self.ENB, GPIO.HIGH)
-        ENA_PWM = GPIO.PWM(self.ENA, 2000)
-        ENB_PWM = GPIO.PWM(self.ENB, 2000)
+        self.ENA_PWM = GPIO.PWM(self.ENA, 2000)
+        self.ENB_PWM = GPIO.PWM(self.ENB, 2000)
         servo1 = GPIO.PWM(self.servoPIN1, 50)
         servo2 = GPIO.PWM(self.servoPIN2, 50)
         servo3 = GPIO.PWM(self.servoPIN3, 50)
-        ENA_PWM.start(0)
-        ENB_PWM.start(0)
+        self.ENA_PWM.start(0)
+        self.ENB_PWM.start(0)
 
     def run(self, speed=20):
         GPIO.output(self.IN1, GPIO.HIGH)
