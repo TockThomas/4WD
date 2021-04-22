@@ -34,7 +34,7 @@ async def keyHandler(websocket, path):
 
 
 print("Starting 4WD")
-car = car.Car
+car = car.Car()
 start_server = websockets.serve(keyHandler, "0.0.0.0", 5678)
 
 asyncio.get_event_loop().run_until_complete(start_server)
