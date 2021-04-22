@@ -15,7 +15,10 @@ async def keyHandler(websocket, path):
         key = await websocket.recv()
         print(key)
         try:
-            keys[key[0]] = key[1]
+            if keys[key[2]] == "t":
+                keys[key[2]] = True
+            elif keys[key[2]] == "f":
+                keys[key[2]] = False
         except:
             print("falsche Taste")
         # if key == "a":
