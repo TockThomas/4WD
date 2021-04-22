@@ -22,13 +22,19 @@ async def keyHandler(websocket, path):
         except:
             print("falsche Taste")
         if keys["w"]:
-            car.run()
-        elif keys["a"]:
-            car.left()
-        elif keys["d"]:
-            car.right()
+            if keys["a"]:
+                car.left()
+            elif keys["d"]:
+                car.right()
+            else:
+                car.run()
         elif keys["s"]:
-            car.back()
+            if keys["a"]:
+                car.back_left()
+            elif keys["d"]:
+                car.back_right()
+            else:
+                car.back()
         else:
             car.brake()
 
