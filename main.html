@@ -10,7 +10,7 @@
 
             function keyDown(event) {
                 console.log([event.key, true]);
-                ws.onopen = () => ws.send([event.key, true]);
+                ws.send([event.key, true]);
             }
         </script>
     </body>
