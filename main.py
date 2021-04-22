@@ -21,10 +21,16 @@ async def keyHandler(websocket, path):
                 keys[key[0]] = False
         except:
             print("falsche Taste")
-        # if key == "a":
-        # bobby.left()
-        # elif key == "w":
-        # bobby.run()
+        if keys["w"]:
+            bobby.run()
+        elif keys["a"]:
+            bobby.left()
+        elif keys["d"]:
+            bobby.right()
+        elif keys["s"]:
+            bobby.back()
+        else:
+            bobby.brake()
 
 
 print("Starting 4WD")
