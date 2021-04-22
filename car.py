@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 
 
-class Car():
+class Car:
     # Tire-Pins
     IN1 = 20  # Linke Reifenseite nach vorne
     IN2 = 21  # Linke Reifenseite nach hinten
