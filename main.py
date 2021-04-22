@@ -22,19 +22,19 @@ async def keyHandler(websocket, path):
         except:
             print("falsche Taste")
         if keys["w"]:
-            bobby.run()
+            car.run()
         elif keys["a"]:
-            bobby.left()
+            car.left()
         elif keys["d"]:
-            bobby.right()
+            car.right()
         elif keys["s"]:
-            bobby.back()
+            car.back()
         else:
-            bobby.brake()
+            car.brake()
 
 
 print("Starting 4WD")
-bobby = car
+car = car()
 start_server = websockets.serve(keyHandler, "0.0.0.0", 5678)
 
 asyncio.get_event_loop().run_until_complete(start_server)
