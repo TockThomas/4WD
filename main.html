@@ -7,10 +7,16 @@
         <script>
             const ws = new WebSocket("ws://raspberrypi:5678/");
             document.addEventListener("keydown", keyDown);
+            document.addEventListener("keyup", keyUp);
 
             function keyDown(event) {
                 console.log([event.key, true]);
                 ws.send([event.key, true]);
+            }
+
+            function keyUp(event) {
+                console.log([event.key, false]);
+                ws.send([event.key, false])
             }
         </script>
     </body>

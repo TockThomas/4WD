@@ -2,15 +2,27 @@ import asyncio
 import websockets
 import car
 
+keys = {
+    "w": False,
+    "a": False,
+    "s": False,
+    "d": False
+}
+
 
 async def keyHandler(websocket, path):
     while True:
         key = await websocket.recv()
         print(key)
-        #if key == "a":
-            #bobby.left()
-        #elif key == "w":
-            #bobby.run()
+        try:
+            keys[key[0]] = key[1]
+        except:
+            print("falsche Taste")
+        # if key == "a":
+        # bobby.left()
+        # elif key == "w":
+        # bobby.run()
+
 
 print("Starting 4WD")
 bobby = car
