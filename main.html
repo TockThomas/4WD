@@ -5,7 +5,8 @@
     </head>
     <body>
         <script>
-            const ws = new WebSocket("ws://raspberrypi:5678/");
+            const ws = new WebSocket("ws://raspberrypi:5678/"),
+            messages = document.createElement('ul');;
             document.addEventListener("keydown", keyDown);
             document.addEventListener("keyup", keyUp);
 
@@ -18,6 +19,15 @@
                 console.log([event.key, false]);
                 ws.send([event.key, false])
             }
+
+            ws.onmessage = function (event) {
+                var messages = document.getElementsByTagName('ul')[0],
+                    message = document.createElement('li'),
+                    content = document.createTextNode(event.data);
+                message.appendChild(content);
+                messages.appendChild(message);
+            };
+            document.body.appendChild(messages);
         </script>
     </body>
 </html>
