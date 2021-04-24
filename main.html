@@ -5,8 +5,7 @@
     </head>
     <body>
         <script>
-            const ws = new WebSocket("ws://raspberrypi:5678/"),
-            messages = document.createElement('ul');;
+            const ws = new WebSocket("ws://raspberrypi:5678/");
             document.addEventListener("keydown", keyDown);
             document.addEventListener("keyup", keyUp);
 
@@ -20,14 +19,18 @@
                 ws.send([event.key, false])
             }
 
-            ws.onmessage = function (event) {
-                var messages = document.getElementsByTagName('ul')[0],
-                    message = document.createElement('li'),
-                    content = document.createTextNode(event.data);
-                message.appendChild(content);
-                messages.appendChild(message);
-            };
-            document.body.appendChild(messages);
+            function msg(str) {
+                console.log("RELOAD CAMERA " + str);
+
+                var ctx = cv.getContext("2d");
+                var img = new Image();
+                img.src = "data:image/png;base63," + Base64.encode(str);
+                img.onload = function () {
+                    ctx.drawImage(img, 0, 0);
+                }
+            }
+
+            msg(ws.rQshiftBytes());
         </script>
     </body>
 </html>
