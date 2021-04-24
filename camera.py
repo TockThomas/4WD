@@ -1,19 +1,11 @@
-import asyncio
-import websockets
 import cv2
 
-capture = cv2.VideoCapture(0)
 
+class Camera:
+    def __init__(self):
+        self.capture = cv2.VideoCapture()
 
-async def keyHandler(websocket, path):
-    while True:
-        ret, frame = capture.read()
-        ret, buffer = cv2.imencode(".jpg", frame)
-        await websocket.send(buffer.tobytes())
-
-
-print("Starting 4WD")
-start_server = websockets.serve(keyHandler, "localhost", 5678)
-
-asyncio.get_event_loop().run_until_complete(start_server)
-asyncio.get_event_loop().run_forever()
+    def frame(self):
+        frame = self.capture.read()[1]
+        buffer = cv2.imencode(".jpg", frame)[1]
+        return buffer.tobytes()

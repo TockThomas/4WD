@@ -1,6 +1,7 @@
 import asyncio
 import websockets
 import car
+import camera
 
 keys = {
     "w": False,
@@ -12,6 +13,7 @@ keys = {
 
 async def keyHandler(websocket, path):
     while True:
+        #Steuerung
         key = await websocket.recv()
         print(key)
         try:
@@ -37,10 +39,12 @@ async def keyHandler(websocket, path):
                 car.back()
         else:
             car.brake()
+        websocket.send(camera.frame())
 
 
 print("Starting 4WD")
 car = car.Car()
+camera = camera.Camera()
 start_server = websockets.serve(keyHandler, "0.0.0.0", 5678)
 
 asyncio.get_event_loop().run_until_complete(start_server)
