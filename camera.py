@@ -6,6 +6,6 @@ class Camera:
         self.capture = cv2.VideoCapture()
 
     def frame(self):
-        frame = self.capture.read()[1]
-        buffer = cv2.imencode(".jpg", frame)[1]
+        ret, frame = self.capture.read()
+        ret, buffer = cv2.imencode(".jpg", frame)
         return buffer.tobytes()
