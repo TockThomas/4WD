@@ -39,7 +39,7 @@ async def keyHandler(websocket, path):
 #                car.back()
 #        else:
 #            car.brake()
-        websocket.send(camera.frame())
+        await websocket.send(camera.frame())
 #
 #
 print("Starting 4WD")
