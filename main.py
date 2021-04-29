@@ -40,10 +40,10 @@ async def keyHandler(websocket, path):
         else:
             car.brake()
         await websocket.send(camera.frame())
-#
-#
+
+
 print("Starting 4WD")
-#car = car.Car()
+car = car.Car()
 camera = camera.Camera()
 start_server = websockets.serve(keyHandler, "0.0.0.0", 5678)
 
