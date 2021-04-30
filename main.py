@@ -2,7 +2,7 @@ import asyncio
 import websockets
 import car
 import camera
-import time
+
 
 keys = {
     "w": False,
@@ -16,7 +16,7 @@ async def sendFrame(websocket, camera):
     print("Thread für Bildübertragung erstellt.")
     while True:
         await websocket.send(camera.frame())
-        time.sleep(0.1)
+        await asyncio.sleep(0.25)
 
 async def keyHandler(websocket, path):
     loop = asyncio.get_event_loop()
