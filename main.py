@@ -19,7 +19,7 @@ async def keyHandler(websocket, path):
             await websocket.send(camera.frame())
     cameraThread = threading.Thread(target=sendFrame, args=(websocket, cameraObj))
     cameraThread.daemon = True
-    cameraThread.start()
+    await cameraThread.start()
     while True:
         #Steuerung
         key = await websocket.recv()
