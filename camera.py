@@ -12,6 +12,7 @@ class Camera:
         print("Kamera ist hochgefahren.")
 
     def frame(self):
-        ret, frame = self.capture.read()
-        ret, buffer = cv2.imencode(".jpg", frame)
-        self.frame_byte = buffer.tobytes()
+        while True:
+            ret, frame = self.capture.read()
+            ret, buffer = cv2.imencode(".jpg", frame)
+            self.frame_byte = buffer.tobytes()

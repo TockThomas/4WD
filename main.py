@@ -46,7 +46,8 @@ async def keyHandler(websocket, path):
     thread = asyncio.run_coroutine_threadsafe(control(websocket), loop)
     print("Thread für Bildübertragung erstellt.")
     while True:
-        await websocket.send(cameraObj.frame_byte)
+        if cameraObj.frame_byte is not None:
+            await websocket.send(cameraObj.frame_byte)
 
 
 
