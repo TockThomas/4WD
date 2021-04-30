@@ -13,13 +13,15 @@ keys = {
 
 
 async def keyHandler(websocket, path):
-    async def sendFrame(websocket, camera):
-        print("Thread für Bildübertragung erstellt.")
-        while True:
-            await websocket.send(camera.frame())
-    cameraThread = threading.Thread(target=sendFrame, args=(websocket, cameraObj))
+    def cameraThread(websocket, camera):
+        async def sendFrame(camera):
+            print("Thread für Bildübertragung erstellt.")
+            while True:
+                await websocket.send(camera.frame())
+        await sendFrame(camera)
+    cameraThread = threading.Thread(target=cameraThread, args=(websocket, cameraObj))
     cameraThread.daemon = True
-    await cameraThread.start()
+    cameraThread.start()
     while True:
         #Steuerung
         key = await websocket.recv()
