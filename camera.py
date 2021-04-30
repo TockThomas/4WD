@@ -10,7 +10,7 @@ class Camera:
         print("erstellt")
         self.process.start()
         print("startet")
-        self.process.join()
+        #self.process.join()
         print("Kamera ist hochgefahren.")
 
     def frame(self):

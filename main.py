@@ -12,7 +12,15 @@ keys = {
 }
 
 
-async def control(websocket):
+async def frame(websocket):
+    print("Thread für Bildübertragung erstellt.")
+    while True:
+        if cameraObj.frame_byte is not None:
+            await websocket.send(cameraObj.frame_byte)
+
+async def keyHandler(websocket, path):
+    loop = asyncio.get_event_loop()
+    thread = asyncio.run_coroutine_threadsafe(frame(websocket), loop)
     while True:
         #Steuerung
         key = await websocket.recv()
@@ -40,16 +48,6 @@ async def control(websocket):
                 car.back()
         else:
             car.brake()
-
-async def keyHandler(websocket, path):
-    loop = asyncio.get_event_loop()
-    thread = asyncio.run_coroutine_threadsafe(control(websocket), loop)
-    print("Thread für Bildübertragung erstellt.")
-    while True:
-        if cameraObj.frame_byte is not None:
-            await websocket.send(cameraObj.frame_byte)
-
-
 
 print("Starting 4WD")
 car = car.Car()
