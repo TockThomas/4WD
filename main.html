@@ -7,13 +7,14 @@
     <img id="image" src="" alt="a"/>
         <script>
             const ws = new WebSocket("ws://raspberrypi:5678/");
+            const wscam = new WebSocket("ws://raspberrypi:5679/")
             var inputs = {
                 "w": false,
                 "a": false,
                 "s": false,
                 "d": false
             }
-            ws.binaryType = "arraybuffer";
+            wscam.binaryType = "arraybuffer";
             document.addEventListener("keydown", keyDown);
             document.addEventListener("keyup", keyUp);
 
@@ -34,7 +35,7 @@
 
             }
 
-            ws.onmessage = function (msg) {
+            wscam.onmessage = function (msg) {
                 var arrayBuffer = msg.data;
                 var bytes = new Uint8Array(arrayBuffer);
                 var image = document.getElementById("image");
