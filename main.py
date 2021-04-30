@@ -17,8 +17,8 @@ async def sendFrame(websocket, camera):
         await websocket.send(camera.frame())
 
 async def keyHandler(websocket, path):
-    loop = asyncio.get_running_loop()
-    await loop.run_in_executor(None, sendFrame(websocket, cameraObj))
+    loop = asyncio.get_event_loop()
+    thread = asyncio.run_coroutine_threadsafe(sendFrame(websocket, cameraObj), loop)
     while True:
         #Steuerung
         key = await websocket.recv()
