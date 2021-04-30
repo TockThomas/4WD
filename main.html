@@ -7,7 +7,7 @@
     <img id="image" src="" alt="a"/>
         <script>
             const ws = new WebSocket("ws://raspberrypi:5678/");
-            var array = {
+            var inputs = {
                 "w": false,
                 "a": false,
                 "s": false,
@@ -18,17 +18,17 @@
             document.addEventListener("keyup", keyUp);
 
             function keyDown(event) {
-                if(event.key != true){
+                if(inputs[event.key] != true){
                     console.log([event.key, true]);
-                    array[event.key] = true;
+                    inputs[event.key] = true;
                     ws.send([event.key, true]);
                 }
             }
 
             function keyUp(event) {
-                if(event.key != false) {
+                if(inputs[event.key] != false) {
                     console.log([event.key, false]);
-                    array[event.key] = false;
+                    inputs[event.key] = false;
                     ws.send([event.key, false])
                 }
 
