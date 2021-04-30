@@ -12,7 +12,7 @@ keys = {
 }
 
 
-def sendFrame(websocket, camera):
+async def sendFrame(websocket, camera):
     print("Thread für Bildübertragung erstellt.")
     while True:
         await websocket.send(camera.frame())
