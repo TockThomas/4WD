@@ -7,7 +7,9 @@ class Camera:
         self.capture = cv2.VideoCapture(0)
         self.frame_byte = None
         self.process = Process(target=self.frame)
+        print("erstellt")
         self.process.start()
+        print("startet")
         self.process.join()
         print("Kamera ist hochgefahren.")
 
