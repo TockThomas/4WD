@@ -15,7 +15,7 @@ keys = {
 def sendFrame(websocket, camera):
     print("Thread für Bildübertragung erstellt.")
     while True:
-        websocket.send(camera.frame())
+        await websocket.send(camera.frame())
 
 async def keyHandler(websocket, path):
     cameraThread = threading.Thread(target=sendFrame, args=(websocket, cameraObj))
