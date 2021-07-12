@@ -131,17 +131,17 @@ class Car:
             GPIO.output(self.LED_G, GPIO.HIGH)
             GPIO.output(self.LED_B, GPIO.HIGH)
 
-    def servo1(self):
+    def servo1_move(self):
         self.servo1.start(self.servo_x)
         time.sleep(0.2)
         self.servo1.stop()
 
-    def servo2(self):
+    def servo2_move(self):
         self.servo2.start(self.servo_y)
         time.sleep(0.2)
         self.servo2.stop()
 
-    def servo3(self):
+    def servo3_move(self):
         self.servo3.start(self.servo_z)
         time.sleep(0.2)
         self.servo3.stop()
@@ -159,13 +159,13 @@ class Car:
         self.servo_x += 0.5
         if self.servo_x > 11:
             self.servo_x = 11
-        self.servo3()
+        self.servo3_move()
 
     def servo_down(self):
         self.servo_x -= 0.5
         if self.servo_x < 4:
             self.servo_x = 4
-        self.servo3()
+        self.servo3_move()
 
     def servo_left(self):
         self.servo_y += 1
@@ -174,8 +174,8 @@ class Car:
             self.servo_y = 12.5
         if self.servo_z > 11:
             self.servo_z = 11
-        self.servo1()
-        self.servo2()
+        self.servo1_move()
+        self.servo2_move()
 
     def servo_right(self):
         self.servo_y -= 1
@@ -184,6 +184,6 @@ class Car:
             self.servo_y = 3.5
         if self.servo_z < 2:
             self.servo_z = 2
-        self.servo1()
-        self.servo2()
+        self.servo1_move()
+        self.servo2_move()
 
