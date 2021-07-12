@@ -120,9 +120,7 @@ class Car:
         self.ENB_PWM.ChangeDutyCycle(speed)
 
     def led(self, color="all"):
-        if color == self.colorstatus:
-            pass
-        elif color == "none":
+        if color == "none":
             GPIO.output(self.LED_R, GPIO.LOW)
             GPIO.output(self.LED_G, GPIO.LOW)
             GPIO.output(self.LED_B, GPIO.LOW)
@@ -131,18 +129,18 @@ class Car:
             GPIO.output(self.LED_G, GPIO.HIGH)
             GPIO.output(self.LED_B, GPIO.HIGH)
 
-    def servo1_move(self):
-        self.servo1.start(self.servo_x)
+    def servo1_move(self, x):
+        self.servo1.start(x)
         time.sleep(0.2)
         self.servo1.stop()
 
-    def servo2_move(self):
-        self.servo2.start(self.servo_y)
+    def servo2_move(self, y):
+        self.servo2.start()
         time.sleep(0.2)
         self.servo2.stop()
 
-    def servo3_move(self):
-        self.servo3.start(self.servo_z)
+    def servo3_move(self, z):
+        self.servo3.start(z)
         time.sleep(0.2)
         self.servo3.stop()
 
@@ -159,13 +157,13 @@ class Car:
         self.servo_x += 0.5
         if self.servo_x > 11:
             self.servo_x = 11
-        self.servo3_move()
+        self.servo3_move(self.servo_x)
 
     def servo_down(self):
         self.servo_x -= 0.5
         if self.servo_x < 4:
             self.servo_x = 4
-        self.servo3_move()
+        self.servo3_move(self.servo_x)
 
     def servo_left(self):
         self.servo_y += 1
@@ -174,8 +172,8 @@ class Car:
             self.servo_y = 12.5
         if self.servo_z > 11:
             self.servo_z = 11
-        self.servo1_move()
-        self.servo2_move()
+        self.servo1_move(self.servo_z)
+        self.servo2_move(self.servo_y)
 
     def servo_right(self):
         self.servo_y -= 1
@@ -184,6 +182,6 @@ class Car:
             self.servo_y = 3.5
         if self.servo_z < 2:
             self.servo_z = 2
-        self.servo1_move()
-        self.servo2_move()
+        self.servo1_move(self.servo_z)
+        self.servo2_move(self.servo_y)
 
