@@ -130,9 +130,12 @@ class Car:
             GPIO.output(self.LED_B, GPIO.HIGH)
 
     def servo_move(self, x, y, z):
-        self.servo1.start(x)
-        self.servo2.start(y)
-        self.servo3.start(z)
+        self.servo1.start(0)
+        self.servo2.start(0)
+        self.servo3.start(0)
+        self.servo1.ChangeDutyCycle(x)
+        self.servo2.ChangeDutyCycle(y)
+        self.servo3.ChangeDutyCycle(z)
         time.sleep(0.2)
         self.servo1.stop()
         self.servo2.stop()
@@ -147,7 +150,6 @@ class Car:
             self.servo_x -= 0.5
             if self.servo_x < 4:
                 self.servo_x = 4
-            self.servo3_move(self.servo_x)
         elif arg == "left":
             self.servo_y += 1
             self.servo_z += 1
