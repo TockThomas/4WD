@@ -132,33 +132,33 @@ class Car:
             GPIO.output(self.LED_B, GPIO.HIGH)
 
     def servo_move(self, x, y, z):
-        self.servo1.ChangeDutyCycle(x)
+        self.servo1.ChangeDutyCycle(z)
         self.servo2.ChangeDutyCycle(y)
-        self.servo3.ChangeDutyCycle(z)
+        self.servo3.ChangeDutyCycle(x)
         time.sleep(0.2)
 
     def servo(self, arg):
         if arg == "up":
-            self.servo_z += 0.5
+            self.servo_x += 0.5
+            if self.servo_x > 11:
+                self.servo_x = 11
+        elif arg == "down":
+            self.servo_x -= 0.5
+            if self.servo_x < 4:
+                self.servo_x = 4
+        elif arg == "left":
+            self.servo_y += 1
+            self.servo_z += 1
+            if self.servo_y > 12.5:
+                self.servo_y = 12.5
             if self.servo_z > 11:
                 self.servo_z = 11
-        elif arg == "down":
-            self.servo_z -= 0.5
-            if self.servo_z < 4:
-                self.servo_z = 4
-        elif arg == "left":
-            self.servo_x += 1
-            self.servo_y += 1
-            if self.servo_x > 12.5:
-                self.servo_x = 12.5
-            if self.servo_y > 11:
-                self.servo_y = 11
         elif arg == "right":
-            self.servo_x -= 1
             self.servo_y -= 1
-            if self.servo_x < 3.5:
-                self.servo_x = 3.5
-            if self.servo_y < 2:
-                self.servo_y = 2
+            self.servo_z -= 1
+            if self.servo_y < 3.5:
+                self.servo_y = 3.5
+            if self.servo_z < 2:
+                self.servo_z = 2
         self.servo_move(self.servo_x, self.servo_y, self.servo_z)
         print(self.servo_x, self.servo_y, self.servo_z)
