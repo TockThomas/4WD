@@ -56,13 +56,13 @@ def start():
                     else:
                         ledstatus = "none"
                 if keys["ArrowUp"]:
-                    car.servo_up()
+                    car.servo("up")
                 elif keys["ArrowDown"]:
-                    car.servo_down()
+                    car.servo("down")
                 elif keys["ArrowLeft"]:
-                    car.servo_left()
+                    car.servo("left")
                 elif keys["ArrowRight"]:
-                    car.servo_right()
+                    car.servo("right")
 
     def keyArrow(key):
         if key == "ArrowUp,true":

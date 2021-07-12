@@ -50,7 +50,7 @@ class Car:
         self.servo_x = 6.5
         self.servo_y = 7.5
         self.servo_z = 6
-        self.servo_default()
+        self.servo_move(self.servo_x, self.servo_y, self.servo_z)
         self.ENA_PWM.start(0)
         self.ENB_PWM.start(0)
         self.colorstatus = "none"
@@ -129,64 +129,38 @@ class Car:
             GPIO.output(self.LED_G, GPIO.HIGH)
             GPIO.output(self.LED_B, GPIO.HIGH)
 
-    def servo1_move(self, x):
+    def servo_move(self, x, y, z):
         self.servo1.start(x)
-        time.sleep(0.2)
-        self.servo1.stop()
-
-    def servo2_move(self, y):
         self.servo2.start(y)
-        time.sleep(0.2)
-        self.servo2.stop()
-
-    def servo3_move(self, z):
         self.servo3.start(z)
         time.sleep(0.2)
-        self.servo3.stop()
-
-    def servo_default(self):
-        self.servo1.start(self.servo_x)
-        self.servo2.start(self.servo_y)
-        self.servo3.start(self.servo_z)
-        time.sleep(0.2)
         self.servo1.stop()
         self.servo2.stop()
         self.servo3.stop()
 
-    def servo_up(self):
-        self.servo_x += 0.5
-        if self.servo_x > 11:
-            self.servo_x = 11
-        self.servo3_move(self.servo_x)
-        print(self.servo_x)
-
-    def servo_down(self):
-        self.servo_x -= 0.5
-        if self.servo_x < 4:
-            self.servo_x = 4
-        self.servo3_move(self.servo_x)
-        print(self.servo_x)
-
-    def servo_left(self):
-        self.servo_y += 1
-        self.servo_z += 1
-        if self.servo_y > 12.5:
-            self.servo_y = 12.5
-        if self.servo_z > 11:
-            self.servo_z = 11
-        self.servo1_move(self.servo_z)
-        self.servo2_move(self.servo_y)
-        print(self.servo_y)
-        print(self.servo_z)
-
-    def servo_right(self):
-        self.servo_y -= 1
-        self.servo_z -= 1
-        if self.servo_y < 3.5:
-            self.servo_y = 3.5
-        if self.servo_z < 2:
-            self.servo_z = 2
-        self.servo1_move(self.servo_z)
-        self.servo2_move(self.servo_y)
-        print(self.servo_y)
-        print(self.servo_z)
+    def servo(self, arg):
+        if arg == "up":
+            self.servo_x += 0.5
+            if self.servo_x > 11:
+                self.servo_x = 11
+        elif arg == "down":
+            self.servo_x -= 0.5
+            if self.servo_x < 4:
+                self.servo_x = 4
+            self.servo3_move(self.servo_x)
+        elif arg == "left":
+            self.servo_y += 1
+            self.servo_z += 1
+            if self.servo_y > 12.5:
+                self.servo_y = 12.5
+            if self.servo_z > 11:
+                self.servo_z = 11
+        elif arg == "right":
+            self.servo_y -= 1
+            self.servo_z -= 1
+            if self.servo_y < 3.5:
+                self.servo_y = 3.5
+            if self.servo_z < 2:
+                self.servo_z = 2
+        self.servo_move(self.servo_x, self.servo_y, self.servo_z)
+        print(self.servo_x, self.servo_y, self.servo_z)
