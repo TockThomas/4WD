@@ -133,16 +133,19 @@ class Car:
         self.servo1.start(x)
         time.sleep(0.2)
         self.servo1.stop()
+        print("move1")
 
     def servo2_move(self, y):
         self.servo2.start()
         time.sleep(0.2)
         self.servo2.stop()
+        print("move2")
 
     def servo3_move(self, z):
         self.servo3.start(z)
         time.sleep(0.2)
         self.servo3.stop()
+        print("move3")
 
     def servo_default(self):
         self.servo1.start(self.servo_x)
@@ -158,12 +161,14 @@ class Car:
         if self.servo_x > 11:
             self.servo_x = 11
         self.servo3_move(self.servo_x)
+        print("up")
 
     def servo_down(self):
         self.servo_x -= 0.5
         if self.servo_x < 4:
             self.servo_x = 4
         self.servo3_move(self.servo_x)
+        print("dowm")
 
     def servo_left(self):
         self.servo_y += 1
@@ -174,6 +179,7 @@ class Car:
             self.servo_z = 11
         self.servo1_move(self.servo_z)
         self.servo2_move(self.servo_y)
+        print("left")
 
     def servo_right(self):
         self.servo_y -= 1
@@ -184,4 +190,5 @@ class Car:
             self.servo_z = 2
         self.servo1_move(self.servo_z)
         self.servo2_move(self.servo_y)
+        print("right")
 
