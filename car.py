@@ -121,7 +121,7 @@ class Car:
         self.ENA_PWM.ChangeDutyCycle(speed)
         self.ENB_PWM.ChangeDutyCycle(speed)
 
-    def led(self, color="all"):
+    def led(self, color):
         if color == "none":
             GPIO.output(self.LED_R, GPIO.LOW)
             GPIO.output(self.LED_G, GPIO.LOW)

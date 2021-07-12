@@ -50,11 +50,11 @@ def start():
                 else:
                     car.brake()
                 if keys["f"]:
-                    car.led(ledstatus)
                     if ledstatus == "none":
                         ledstatus = "all"
                     else:
                         ledstatus = "none"
+                    car.led(ledstatus)
                 if keys["ArrowUp"]:
                     car.servo("up")
                 elif keys["ArrowDown"]:
