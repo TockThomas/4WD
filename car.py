@@ -50,7 +50,9 @@ class Car:
         self.servo_x = 6.5
         self.servo_y = 7.5
         self.servo_z = 6
-        self.servo_move(self.servo_x, self.servo_y, self.servo_z)
+        self.servo1.start(self.servo_x)
+        self.servo2.start(self.servo_y)
+        self.servo3.start(self.servo_z)
         self.ENA_PWM.start(0)
         self.ENB_PWM.start(0)
         self.colorstatus = "none"
@@ -130,16 +132,10 @@ class Car:
             GPIO.output(self.LED_B, GPIO.HIGH)
 
     def servo_move(self, x, y, z):
-        self.servo1.start(0)
-        self.servo2.start(0)
-        self.servo3.start(0)
         self.servo1.ChangeDutyCycle(x)
         self.servo2.ChangeDutyCycle(y)
         self.servo3.ChangeDutyCycle(z)
         time.sleep(0.2)
-        self.servo1.stop()
-        self.servo2.stop()
-        self.servo3.stop()
 
     def servo(self, arg):
         if arg == "up":
