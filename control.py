@@ -24,25 +24,31 @@ def start():
                     keys[key[0]] = False
             except:
                 print("falsche Taste")
-            if keys["w"]:
-                if keys["a"]:
-                    car.left()
-                elif keys["d"]:
-                    car.right()
+            if carstatus:
+                if keys["w"]:
+                    if keys["a"]:
+                        car.left()
+                    elif keys["d"]:
+                        car.right()
+                    else:
+                        car.run()
+                elif keys["s"]:
+                    if keys["a"]:
+                        car.back_left()
+                    elif keys["d"]:
+                        car.back_right()
+                    else:
+                        car.back()
                 else:
-                    car.run()
-            elif keys["s"]:
-                if keys["a"]:
-                    car.back_left()
-                elif keys["d"]:
-                    car.back_right()
-                else:
-                    car.back()
-            else:
-                car.brake()
+                    car.brake()
 
-    print("Starting 4WD")
-    car = car.Car()
+    print("-- Starting 4WD --")
+    try:
+        car = car.Car()
+        carstatus = True
+    except:
+        print("Auto nicht verfügbar.")
+        carstatus = False
     start_server = websockets.serve(keyHandler, "0.0.0.0", 5678)
 
     asyncio.get_event_loop().run_until_complete(start_server)

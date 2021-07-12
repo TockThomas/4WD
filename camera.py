@@ -19,8 +19,11 @@ def start():
         while True:
             await websocket.send(cameraObj.frame())
 
-    print("Starting 4WD")
-    cameraObj = Camera()
+    print("-- Starting 4WD-Camera --")
+    try:
+        cameraObj = Camera()
+    except:
+        print("Kamera nicht verfügbar.")
     start_server = websockets.serve(cameraHandler, "0.0.0.0", 5679)
 
     asyncio.get_event_loop().run_until_complete(start_server)
