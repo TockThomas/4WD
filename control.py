@@ -28,7 +28,6 @@ def start():
                     keys[key[0]] = True
                 elif key[2] == "f":
                     keys[key[0]] = False
-                elif key
             except:
                 print("falsche Taste")
             if carstatus:
