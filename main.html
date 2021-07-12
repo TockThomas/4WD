@@ -7,9 +7,17 @@
     <body class="page">
         <div class="block">
             <img class="video" id="image" src="" alt="a"/>
-            <div>
-
+            <div class="info">
+                <h1 class="info__title">Information</h1>
+                <h2 class="info__subtitle">Controls</h2>
+                WASD - Move
+                F - Lights on/off
+                <h2 class="info__subtitle">Status</h2>
+                Test: CPU 05%
             </div>
+        </div>
+        <div class="controlpanel">
+            Test
         </div>
     </body>
     <script>
@@ -19,7 +27,8 @@
             "w": false,
             "a": false,
             "s": false,
-            "d": false
+            "d": false,
+            "f": false
         }
         wscam.binaryType = "arraybuffer";
         document.addEventListener("keydown", keyDown);

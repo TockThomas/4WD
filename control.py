@@ -8,7 +8,8 @@ def start():
         "w": False,
         "a": False,
         "s": False,
-        "d": False
+        "d": False,
+        "f": False
     }
 
 
@@ -41,6 +42,12 @@ def start():
                         car.back()
                 else:
                     car.brake()
+                if keys["f"]:
+                    car.led(ledstatus)
+                    if ledstatus == "none":
+                        ledstatus = "all"
+                    else:
+                        ledstatus = "none"
 
     print("-- Starting 4WD --")
     try:
@@ -49,6 +56,7 @@ def start():
     except:
         print("Auto nicht verfügbar.")
         carstatus = False
+    ledstatus = "none"
     start_server = websockets.serve(keyHandler, "0.0.0.0", 5678)
 
     asyncio.get_event_loop().run_until_complete(start_server)
