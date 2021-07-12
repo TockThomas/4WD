@@ -21,6 +21,7 @@ def start():
         while True:
             #Steuerung
             key = await websocket.recv()
+            ledstatus = "none"
             print(key)
             try:
                 if key[2] == "t":
@@ -68,7 +69,6 @@ def start():
     except:
         print("Auto nicht verfügbar.")
         carstatus = False
-    ledstatus = "none"
     start_server = websockets.serve(keyHandler, "0.0.0.0", 5678)
 
     asyncio.get_event_loop().run_until_complete(start_server)
