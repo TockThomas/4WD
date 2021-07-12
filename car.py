@@ -136,7 +136,7 @@ class Car:
         print("move1")
 
     def servo2_move(self, y):
-        self.servo2.start()
+        self.servo2.start(y)
         time.sleep(0.2)
         self.servo2.stop()
         print("move2")
