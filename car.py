@@ -44,9 +44,13 @@ class Car:
         GPIO.output(self.ENB, GPIO.HIGH)
         self.ENA_PWM = GPIO.PWM(self.ENA, 2000)
         self.ENB_PWM = GPIO.PWM(self.ENB, 2000)
-        servo1 = GPIO.PWM(self.servoPIN1, 50)
-        servo2 = GPIO.PWM(self.servoPIN2, 50)
-        servo3 = GPIO.PWM(self.servoPIN3, 50)
+        self.servo1 = GPIO.PWM(self.servoPIN1, 50)
+        self.servo2 = GPIO.PWM(self.servoPIN2, 50)
+        self.servo3 = GPIO.PWM(self.servoPIN3, 50)
+        self.servo_x = 6.5
+        self.servo_y = 7.5
+        self.servo_z = 6
+        self.servo_default()
         self.ENA_PWM.start(0)
         self.ENB_PWM.start(0)
         self.colorstatus = "none"
@@ -126,3 +130,60 @@ class Car:
             GPIO.output(self.LED_R, GPIO.HIGH)
             GPIO.output(self.LED_G, GPIO.HIGH)
             GPIO.output(self.LED_B, GPIO.HIGH)
+
+    def servo1(self):
+        self.servo1.start(self.servo_x)
+        time.sleep(0.2)
+        self.servo1.stop()
+
+    def servo2(self):
+        self.servo2.start(self.servo_y)
+        time.sleep(0.2)
+        self.servo2.stop()
+
+    def servo3(self):
+        self.servo3.start(self.servo_z)
+        time.sleep(0.2)
+        self.servo3.stop()
+
+    def servo_default(self):
+        self.servo1.start(self.servo_x)
+        self.servo2.start(self.servo_y)
+        self.servo3.start(self.servo_z)
+        time.sleep(0.2)
+        self.servo1.stop()
+        self.servo2.stop()
+        self.servo3.stop()
+
+    def servo_up(self):
+        self.servo_x += 0.5
+        if self.servo_x > 11:
+            self.servo_x = 11
+        self.servo3()
+
+    def servo_down(self):
+        self.servo_x -= 0.5
+        if self.servo_x < 4:
+            self.servo_x = 4
+        self.servo3()
+
+    def servo_left(self):
+        self.servo_y += 1
+        self.servo_z += 1
+        if self.servo_y > 12.5:
+            self.servo_y = 12.5
+        if self.servo_z > 11:
+            self.servo_z = 11
+        self.servo1()
+        self.servo2()
+
+    def servo_right(self):
+        self.servo_y -= 1
+        self.servo_z -= 1
+        if self.servo_y < 3.5:
+            self.servo_y = 3.5
+        if self.servo_z < 2:
+            self.servo_z = 2
+        self.servo1()
+        self.servo2()
+

@@ -9,7 +9,11 @@ def start():
         "a": False,
         "s": False,
         "d": False,
-        "f": False
+        "f": False,
+        "ArrowUp": False,
+        "ArrowDown": False,
+        "ArrowLeft": False,
+        "ArrowRight": False
     }
 
 
@@ -48,6 +52,14 @@ def start():
                         ledstatus = "all"
                     else:
                         ledstatus = "none"
+                if keys["ArrowUp"]:
+                    car.servo_up()
+                elif keys["ArrowDown"]:
+                    car.servo_down()
+                elif keys["ArrowLeft"]:
+                    car.servo_left()
+                elif keys["ArrowRight"]:
+                    car.servo_right()
 
     print("-- Starting 4WD --")
     try:
