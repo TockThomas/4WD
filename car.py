@@ -139,26 +139,26 @@ class Car:
 
     def servo(self, arg):
         if arg == "up":
-            self.servo_x += 0.5
-            if self.servo_x > 11:
-                self.servo_x = 11
-        elif arg == "down":
-            self.servo_x -= 0.5
-            if self.servo_x < 4:
-                self.servo_x = 4
-        elif arg == "left":
-            self.servo_x += 1
-            self.servo_z += 1
-            if self.servo_x > 12.5:
-                self.servo_x = 12.5
+            self.servo_z += 0.5
             if self.servo_z > 11:
                 self.servo_z = 11
+        elif arg == "down":
+            self.servo_z -= 0.5
+            if self.servo_z < 4:
+                self.servo_z = 4
+        elif arg == "left":
+            self.servo_x += 1
+            self.servo_y += 1
+            if self.servo_x > 12.5:
+                self.servo_x = 12.5
+            if self.servo_y > 11:
+                self.servo_y = 11
         elif arg == "right":
             self.servo_x -= 1
-            self.servo_z -= 1
+            self.servo_y -= 1
             if self.servo_x < 3.5:
                 self.servo_x = 3.5
-            if self.servo_z < 2:
-                self.servo_z = 2
+            if self.servo_y < 2:
+                self.servo_y = 2
         self.servo_move(self.servo_x, self.servo_y, self.servo_z)
         print(self.servo_x, self.servo_y, self.servo_z)
