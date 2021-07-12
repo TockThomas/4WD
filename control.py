@@ -28,6 +28,7 @@ def start():
                     keys[key[0]] = True
                 elif key[2] == "f":
                     keys[key[0]] = False
+                elif key
             except:
                 print("falsche Taste")
             if carstatus:
@@ -61,6 +62,24 @@ def start():
                     car.servo_left()
                 elif keys["ArrowRight"]:
                     car.servo_right()
+
+    def keyArrow(key):
+        if key == "ArrowUp,true":
+            keys["ArrowUp"] = True
+        elif key == "ArrowUp,false":
+            keys["ArrowUp"] = False
+        elif key == "ArrowDown,true":
+            keys["ArrowDown"] = True
+        elif key == "ArrowDown,false":
+            keys["ArrowDown"] = False
+        elif key == "ArrowLeft,true":
+            keys["ArrowLeft"] = True
+        elif key == "ArrowLeft,false":
+            keys["ArrowLeft"] = False
+        elif key == "ArrowRight,true":
+            keys["ArrowRight"] = True
+        elif key == "ArrowRight,false":
+            keys["ArrowRight"] = False
 
     print("-- Starting 4WD --")
     try:
