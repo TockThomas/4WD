@@ -138,11 +138,11 @@ class Car:
     def servo_move(self):
         self.servo1.ChangeDutyCycle(self.servo_z)
         self.servo2.ChangeDutyCycle(self.servo_y)
-        self.servo3.ChangedutyCycle(self.servo_x)
+        self.servo3.ChangeDutyCycle(self.servo_x)
         time.sleep(0.2)
         self.servo1.ChangeDutyCycle(0)
         self.servo2.ChangeDutyCycle(0)
-        self.servo3.ChangedutyCycle(0)
+        self.servo3.ChangeDutyCycle(0)
 
     def servo(self, arg):
         if arg == "up":
