@@ -21,7 +21,6 @@ def start():
         while True:
             #Steuerung
             key = await websocket.recv()
-            ledstatus = "none"
             print(key)
             try:
                 if key[2] == "t":
@@ -50,11 +49,7 @@ def start():
                 else:
                     car.brake()
                 if keys["f"]:
-                    if ledstatus == "none":
-                        ledstatus = "all"
-                    else:
-                        ledstatus = "none"
-                    car.led(ledstatus)
+                    car.led()
                 if keys["ArrowUp"]:
                     car.servo("up")
                 elif keys["ArrowDown"]:

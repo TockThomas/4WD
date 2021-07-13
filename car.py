@@ -53,7 +53,7 @@ class Car:
         self.servo_start()
         self.ENA_PWM.start(0)
         self.ENB_PWM.start(0)
-        self.colorstatus = "none"
+        self.ledstatus = False
 
     def run(self, speed=20):
         GPIO.output(self.IN1, GPIO.HIGH)
@@ -119,15 +119,16 @@ class Car:
         self.ENA_PWM.ChangeDutyCycle(speed)
         self.ENB_PWM.ChangeDutyCycle(speed)
 
-    def led(self, color):
-        if color == "none":
-            GPIO.output(self.LED_R, GPIO.LOW)
-            GPIO.output(self.LED_G, GPIO.LOW)
-            GPIO.output(self.LED_B, GPIO.LOW)
-        elif color == "all":
+    def led(self):
+        self.ledstatus = not self.ledstatus
+        if self.ledstatus:
             GPIO.output(self.LED_R, GPIO.HIGH)
             GPIO.output(self.LED_G, GPIO.HIGH)
             GPIO.output(self.LED_B, GPIO.HIGH)
+        else:
+            GPIO.output(self.LED_R, GPIO.LOW)
+            GPIO.output(self.LED_G, GPIO.LOW)
+            GPIO.output(self.LED_B, GPIO.LOW)
 
     def servo_start(self):
         self.servo1.start(self.servo_z)
