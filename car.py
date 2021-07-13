@@ -139,7 +139,7 @@ class Car:
         self.servo1.ChangeDutyCycle(self.servo_z)
         self.servo2.ChangeDutyCycle(self.servo_y)
         self.servo3.ChangeDutyCycle(self.servo_x)
-        time.sleep(0.5)
+        time.sleep(0.25)
         self.servo1.ChangeDutyCycle(0)
         self.servo2.ChangeDutyCycle(0)
         self.servo3.ChangeDutyCycle(0)
