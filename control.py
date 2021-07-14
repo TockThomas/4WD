@@ -10,6 +10,7 @@ def start():
         "s": False,
         "d": False,
         "f": False,
+        "e": False,
         "ArrowUp": False,
         "ArrowDown": False,
         "ArrowLeft": False,
@@ -21,16 +22,7 @@ def start():
         while True:
             #Steuerung
             key = await websocket.recv()
-            print(key)
-            try:
-                if key[2] == "t":
-                    keys[key[0]] = True
-                elif key[2] == "f":
-                    keys[key[0]] = False
-                else:
-                    keyArrow(key)
-            except:
-                print("falsche Taste")
+            eventKey(key)
             if carstatus:
                 if keys["w"]:
                     if keys["a"]:
@@ -50,7 +42,7 @@ def start():
                     car.brake()
                 if keys["f"]:
                     car.led()
-                if keys["ArrowUp"]:
+                elif keys["ArrowUp"]:
                     car.servo("up")
                 elif keys["ArrowDown"]:
                     car.servo("down")
@@ -58,6 +50,19 @@ def start():
                     car.servo("left")
                 elif keys["ArrowRight"]:
                     car.servo("right")
+                elif keys["e"]:
+                    car.buzzer()
+
+    def eventKey(key):
+        try:
+            if key[2] == "t":
+                keys[key[0]] = True
+            elif key[2] == "f":
+                keys[key[0]] = False
+            else:
+                keyArrow(key)
+        except:
+            print("falsche Taste")
 
     def keyArrow(key):
         if key == "ArrowUp,true":
