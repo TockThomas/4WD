@@ -40,6 +40,10 @@ def start():
                         car.back()
                 else:
                     car.brake()
+                if keys["e"]:
+                    car.buzzerOn()
+                else:
+                    car.buzzerOff()
                 if keys["f"]:
                     car.led()
                 elif keys["ArrowUp"]:
@@ -50,8 +54,6 @@ def start():
                     car.servo("left")
                 elif keys["ArrowRight"]:
                     car.servo("right")
-                elif keys["e"]:
-                    car.buzzer()
 
     def eventKey(key):
         try:

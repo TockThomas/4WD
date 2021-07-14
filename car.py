@@ -41,5 +41,8 @@ class Car:
     def servo(self, arg):
         Servo.servo(arg)
 
-    def buzzer(self):
-        Buzzer.buzzer()
+    def buzzerOn(self):
+        Buzzer.on()
+
+    def buzzerOff(self):
+        Buzzer.off()
