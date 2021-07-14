@@ -1,171 +1,44 @@
 try:
     import RPi.GPIO as GPIO
+    import Car.Tire as Tire
+    import Car.Led as Led
+    import Car.Servo as Servo
 except:
     print("Raspberry Pi nicht erkannt")
-import time
 
 
 class Car:
     def __init__(self):
-        # Tire-Pins
-        self.IN1 = 20  # Linke Reifenseite nach vorne
-        self.IN2 = 21  # Linke Reifenseite nach hinten
-        self.IN3 = 19  # Rechte Reifenseite nach vorne
-        self.IN4 = 26  # Rechte Reifenseite nach hinten
-        self.ENA = 16
-        self.ENB = 13
-        # LED-Pins
-        self.LED_R = 22
-        self.LED_G = 27
-        self.LED_B = 24
-        # Servo-Pins
-        self.servoPIN1 = 23
-        self.servoPIN2 = 11
-        self.servoPIN3 = 9
         # Buzzer-Pin
         buzzer = 8
         # GPIO-setup
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
-        GPIO.setup(self.IN1, GPIO.OUT)
-        GPIO.setup(self.IN2, GPIO.OUT)
-        GPIO.setup(self.IN3, GPIO.OUT)
-        GPIO.setup(self.IN4, GPIO.OUT)
-        GPIO.setup(self.ENA, GPIO.OUT)
-        GPIO.setup(self.ENB, GPIO.OUT)
-        GPIO.setup(self.LED_R, GPIO.OUT)
-        GPIO.setup(self.LED_G, GPIO.OUT)
-        GPIO.setup(self.LED_B, GPIO.OUT)
-        GPIO.setup(self.servoPIN1, GPIO.OUT)
-        GPIO.setup(self.servoPIN2, GPIO.OUT)
-        GPIO.setup(self.servoPIN3, GPIO.OUT)
         GPIO.setup(buzzer, GPIO.OUT)
-        GPIO.output(self.ENA, GPIO.HIGH)
-        GPIO.output(self.ENB, GPIO.HIGH)
-        self.ENA_PWM = GPIO.PWM(self.ENA, 2000)
-        self.ENB_PWM = GPIO.PWM(self.ENB, 2000)
-        self.servo1 = GPIO.PWM(self.servoPIN1, 50)
-        self.servo2 = GPIO.PWM(self.servoPIN2, 50)
-        self.servo3 = GPIO.PWM(self.servoPIN3, 50)
-        self.servo_x = 6.5
-        self.servo_y = 7.5
-        self.servo_z = 6
-        self.servo_start()
-        self.ENA_PWM.start(0)
-        self.ENB_PWM.start(0)
-        self.ledstatus = False
 
     def run(self, speed=20):
-        GPIO.output(self.IN1, GPIO.HIGH)
-        GPIO.output(self.IN2, GPIO.LOW)
-        GPIO.output(self.IN3, GPIO.HIGH)
-        GPIO.output(self.IN4, GPIO.LOW)
-        self.ENA_PWM.ChangeDutyCycle(speed)
-        self.ENB_PWM.ChangeDutyCycle(speed)
+        Tire.run(speed)
 
     def left(self, speed=20):
-        self.ENA = 1 * speed / 20
-        self.ENB = 30 * speed / 20
-        GPIO.output(self.IN1, GPIO.HIGH)
-        GPIO.output(self.IN2, GPIO.LOW)
-        GPIO.output(self.IN3, GPIO.HIGH)
-        GPIO.output(self.IN4, GPIO.LOW)
-        self.ENA_PWM.ChangeDutyCycle(self.ENA)
-        self.ENB_PWM.ChangeDutyCycle(self.ENB)
+        Tire.left(speed)
 
-    def right(self, speed=20):
-        self.ENA = 30 * speed / 20
-        self.ENB = 1 * speed / 20
-        GPIO.output(self.IN1, GPIO.HIGH)
-        GPIO.output(self.IN2, GPIO.LOW)
-        GPIO.output(self.IN3, GPIO.HIGH)
-        GPIO.output(self.IN4, GPIO.LOW)
-        self.ENA_PWM.ChangeDutyCycle(self.ENA)
-        self.ENB_PWM.ChangeDutyCycle(self.ENB)
+    def right(self,speed=20):
+        Tire.right(speed)
 
     def back_right(self, speed=20):
-        self.ENA = 30 * speed / 20
-        self.ENB = 1 * speed / 20
-        GPIO.output(self.IN1, GPIO.LOW)
-        GPIO.output(self.IN2, GPIO.HIGH)
-        GPIO.output(self.IN3, GPIO.LOW)
-        GPIO.output(self.IN4, GPIO.HIGH)
-        self.ENA_PWM.ChangeDutyCycle(self.ENA)
-        self.ENB_PWM.ChangeDutyCycle(self.ENB)
+        Tire.back_right(speed)
 
     def back_left(self, speed=20):
-        self.ENA = 1 * speed / 20
-        self.ENB = 30 * speed / 20
-        GPIO.output(self.IN1, GPIO.LOW)
-        GPIO.output(self.IN2, GPIO.HIGH)
-        GPIO.output(self.IN3, GPIO.LOW)
-        GPIO.output(self.IN4, GPIO.HIGH)
-        self.ENA_PWM.ChangeDutyCycle(self.ENA)
-        self.ENB_PWM.ChangeDutyCycle(self.ENB)
+        Tire.back_left(speed)
 
     def back(self, speed=20):
-        GPIO.output(self.IN1, GPIO.LOW)
-        GPIO.output(self.IN2, GPIO.HIGH)
-        GPIO.output(self.IN3, GPIO.LOW)
-        GPIO.output(self.IN4, GPIO.HIGH)
-        self.ENA_PWM.ChangeDutyCycle(speed)
-        self.ENB_PWM.ChangeDutyCycle(speed)
+        Tire.back(speed)
 
     def brake(self, speed=20):
-        GPIO.output(self.IN1, GPIO.LOW)
-        GPIO.output(self.IN2, GPIO.LOW)
-        GPIO.output(self.IN3, GPIO.LOW)
-        GPIO.output(self.IN4, GPIO.LOW)
-        self.ENA_PWM.ChangeDutyCycle(speed)
-        self.ENB_PWM.ChangeDutyCycle(speed)
+        Tire.brake(speed)
 
     def led(self):
-        self.ledstatus = not self.ledstatus
-        if self.ledstatus:
-            GPIO.output(self.LED_R, GPIO.HIGH)
-            GPIO.output(self.LED_G, GPIO.HIGH)
-            GPIO.output(self.LED_B, GPIO.HIGH)
-        else:
-            GPIO.output(self.LED_R, GPIO.LOW)
-            GPIO.output(self.LED_G, GPIO.LOW)
-            GPIO.output(self.LED_B, GPIO.LOW)
-
-    def servo_start(self):
-        self.servo1.start(self.servo_z)
-        self.servo2.start(self.servo_y)
-        self.servo3.start(self.servo_x)
-        self.servo_move()
-
-    def servo_move(self):
-        self.servo1.ChangeDutyCycle(self.servo_z)
-        self.servo2.ChangeDutyCycle(self.servo_y)
-        self.servo3.ChangeDutyCycle(self.servo_x)
-        time.sleep(0.25)
-        self.servo1.ChangeDutyCycle(0)
-        self.servo2.ChangeDutyCycle(0)
-        self.servo3.ChangeDutyCycle(0)
+        Led.led()
 
     def servo(self, arg):
-        if arg == "up":
-            self.servo_x += 0.5
-            if self.servo_x > 11:
-                self.servo_x = 11
-        elif arg == "down":
-            self.servo_x -= 0.5
-            if self.servo_x < 4:
-                self.servo_x = 4
-        elif arg == "left":
-            self.servo_y += 1
-            self.servo_z += 1
-            if self.servo_y > 12.5:
-                self.servo_y = 12.5
-            if self.servo_z > 11:
-                self.servo_z = 11
-        elif arg == "right":
-            self.servo_y -= 1
-            self.servo_z -= 1
-            if self.servo_y < 3.5:
-                self.servo_y = 3.5
-            if self.servo_z < 2:
-                self.servo_z = 2
-        self.servo_move()
+        Servo(arg)
