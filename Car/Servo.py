@@ -8,8 +8,6 @@ class Servo:
         self.servoPIN1 = 23
         self.servoPIN2 = 11
         self.servoPIN3 = 9
-        self.ENA = 16
-        self.ENB = 13
 
         #GPIO-setup
         GPIO.setup(self.servoPIN1, GPIO.OUT)
