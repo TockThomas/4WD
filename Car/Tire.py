@@ -30,6 +30,7 @@ class Tire:
         GPIO.output(self.IN4, GPIO.LOW)
         self.ENA_PWM.ChangeDutyCycle(speed)
         self.ENB_PWM.ChangeDutyCycle(speed)
+        print(speed)
 
     def left(self, speed=20):
         ENA = 1 * speed / 20
