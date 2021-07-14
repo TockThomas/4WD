@@ -85,12 +85,14 @@ def start():
             keys["ArrowRight"] = False
 
     print("-- Starting 4WD --")
-    try:
+    car = car.Car()
+    carstatus = True
+    """try:
         car = car.Car()
         carstatus = True
     except:
         print("Auto nicht verfügbar.")
-        carstatus = False
+        carstatus = False"""
     start_server = websockets.serve(keyHandler, "0.0.0.0", 5678)
 
     asyncio.get_event_loop().run_until_complete(start_server)

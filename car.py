@@ -1,16 +1,11 @@
-import RPi.GPIO as GPIO
-import Car.Tire as Tire
-import Car.Led as Led
-import Car.Servo as Servo
-import Car.Buzzer as Buzzer
-"""try:
+try:
     import RPi.GPIO as GPIO
     import Car.Tire as Tire
     import Car.Led as Led
     import Car.Servo as Servo
     import Car.Buzzer as Buzzer
 except:
-    print("Raspberry Pi nicht erkannt")"""
+    print("Raspberry Pi nicht erkannt")
 
 
 class Car:
