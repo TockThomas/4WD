@@ -13,36 +13,40 @@ class Car:
         # GPIO-setup
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
+        self.tire = Tire.Tire()
+        self.led = Led.Led()
+        self.servo = Servo.Servo()
+        self.buzzer = Buzzer.Buzzer()
 
     def run(self, speed=20):
-        Tire.run(speed)
+        self.tire.run(speed)
 
     def left(self, speed=20):
-        Tire.left(speed)
+        self.tire.left(speed)
 
     def right(self,speed=20):
-        Tire.right(speed)
+        self.tire.right(speed)
 
     def back_right(self, speed=20):
-        Tire.back_right(speed)
+        self.tire.back_right(speed)
 
     def back_left(self, speed=20):
-        Tire.back_left(speed)
+        self.tire.back_left(speed)
 
     def back(self, speed=20):
-        Tire.back(speed)
+        self.tire.back(speed)
 
     def brake(self, speed=20):
-        Tire.brake(speed)
+        self.tire.brake(speed)
 
     def led(self):
-        Led.led()
+        self.led.led()
 
     def servo(self, arg):
-        Servo.servo(arg)
+        self.servo.servo(arg)
 
     def buzzerOn(self):
-        Buzzer.on()
+        self.buzzer.on()
 
     def buzzerOff(self):
-        Buzzer.off()
+        self.buzzer.off()
