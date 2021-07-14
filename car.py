@@ -3,18 +3,16 @@ try:
     import Car.Tire as Tire
     import Car.Led as Led
     import Car.Servo as Servo
+    import Car.Buzzer as Buzzer
 except:
     print("Raspberry Pi nicht erkannt")
 
 
 class Car:
     def __init__(self):
-        # Buzzer-Pin
-        buzzer = 8
         # GPIO-setup
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
-        GPIO.setup(buzzer, GPIO.OUT)
 
     def run(self, speed=20):
         Tire.run(speed)
@@ -41,4 +39,7 @@ class Car:
         Led.led()
 
     def servo(self, arg):
-        Servo(arg)
+        Servo.servo(arg)
+
+    def buzzer(self):
+        Buzzer.buzzer()

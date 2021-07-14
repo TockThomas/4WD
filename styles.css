@@ -1,7 +1,14 @@
+.body {
+    display: flex;
+    justify-content: center;
+    background-color: #2B2B2B;
+}
+
 .page {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-content: center;
     background-color: #2B2B2B;
     font-family: Arial;
 }
@@ -12,6 +19,7 @@
     background-color: #383838;
     border: 5px solid black;
     margin-bottom: 40px;
+    width: 1080px;
 }
 
 .video {
@@ -49,4 +57,5 @@
     justify-content: space-evenly;
     background-color: #383838;
     border: 5px solid black;
+    width: 1080px;
 }
