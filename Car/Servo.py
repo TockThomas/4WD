@@ -18,14 +18,10 @@ class Servo:
         self.servo1 = GPIO.PWM(self.servoPIN1, 50)
         self.servo2 = GPIO.PWM(self.servoPIN2, 50)
         self.servo3 = GPIO.PWM(self.servoPIN3, 50)
-        self.ENA_PWM = GPIO.PWM(self.ENA, 2000)
-        self.ENB_PWM = GPIO.PWM(self.ENB, 2000)
         self.servo_x = 6.5
         self.servo_y = 7.5
         self.servo_z = 6
         self.servo_start()
-        self.ENA_PWM.start(0)
-        self.ENB_PWM.start(0)
 
     def servo_start(self):
         self.servo1.start(self.servo_z)
