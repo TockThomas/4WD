@@ -13,10 +13,10 @@ class Car:
         # GPIO-setup
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
-        self.tire = Tire()
-        self.led = Led()
-        self.servo = Servo()
-        self.buzzer = Buzzer()
+        self.tire = Tire
+        self.led = Led
+        self.servo = Servo
+        self.buzzer = Buzzer
 
     def run(self, speed=20):
         self.tire.run(speed)
