@@ -3,7 +3,7 @@ try:
     import Car.Tire as Tire
     import Car.Led as Led
     import Car.Servo as Servo
-    #import Car.Buzzer as Buzzer
+    import Car.Buzzer as Buzzer
 except:
     print("Raspberry Pi nicht erkannt")
 
@@ -45,8 +45,8 @@ class Car:
     def servo(self, arg):
         self.servo.servo(arg)
 
-    """def buzzerOn(self):
+    def buzzerOn(self):
         self.buzzer.on()
 
     def buzzerOff(self):
-        self.buzzer.off()"""
+        self.buzzer.off()
