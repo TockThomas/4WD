@@ -22,8 +22,6 @@ class Tire:
         GPIO.output(self.ENB, GPIO.HIGH)
         self.ENA_PWM = GPIO.PWM(self.ENA, 2000)
         self.ENB_PWM = GPIO.PWM(self.ENB, 2000)
-        self.ENA_PWM.start(0)
-        self.ENA_PWM.start(0)
 
     def run(self, speed=20):
         GPIO.output(self.IN1, GPIO.HIGH)
@@ -34,36 +32,44 @@ class Tire:
         self.ENB_PWM.ChangeDutyCycle(speed)
 
     def left(self, speed=20):
+        ENA = 1 * speed / 20
+        ENB = 30 * speed / 20
         GPIO.output(self.IN1, GPIO.HIGH)
         GPIO.output(self.IN2, GPIO.LOW)
         GPIO.output(self.IN3, GPIO.HIGH)
         GPIO.output(self.IN4, GPIO.LOW)
-        self.ENA_PWM.ChangeDutyCycle(self.ENA)
-        self.ENB_PWM.ChangeDutyCycle(self.ENB)
+        self.ENA_PWM.ChangeDutyCycle(ENA)
+        self.ENB_PWM.ChangeDutyCycle(ENB)
 
     def right(self, speed=20):
+        ENA = 30 * speed / 20
+        ENB = 1 * speed / 20
         GPIO.output(self.IN1, GPIO.HIGH)
         GPIO.output(self.IN2, GPIO.LOW)
         GPIO.output(self.IN3, GPIO.HIGH)
         GPIO.output(self.IN4, GPIO.LOW)
-        self.ENA_PWM.ChangeDutyCycle(self.ENA)
-        self.ENB_PWM.ChangeDutyCycle(self.ENB)
+        self.ENA_PWM.ChangeDutyCycle(ENA)
+        self.ENB_PWM.ChangeDutyCycle(ENB)
 
     def back_right(self, speed=20):
+        ENA = 30 * speed / 20
+        ENB = 1 * speed / 20
         GPIO.output(self.IN1, GPIO.LOW)
         GPIO.output(self.IN2, GPIO.HIGH)
         GPIO.output(self.IN3, GPIO.LOW)
         GPIO.output(self.IN4, GPIO.HIGH)
-        self.ENA_PWM.ChangeDutyCycle(self.ENA)
-        self.ENB_PWM.ChangeDutyCycle(self.ENB)
+        self.ENA_PWM.ChangeDutyCycle(ENA)
+        self.ENB_PWM.ChangeDutyCycle(ENB)
 
     def back_left(self, speed=20):
+        ENA = 1 * speed / 20
+        ENB = 30 * speed / 20
         GPIO.output(self.IN1, GPIO.LOW)
         GPIO.output(self.IN2, GPIO.HIGH)
         GPIO.output(self.IN3, GPIO.LOW)
         GPIO.output(self.IN4, GPIO.HIGH)
-        self.ENA_PWM.ChangeDutyCycle(self.ENA)
-        self.ENB_PWM.ChangeDutyCycle(self.ENB)
+        self.ENA_PWM.ChangeDutyCycle(ENA)
+        self.ENB_PWM.ChangeDutyCycle(ENB)
 
     def back(self, speed=20):
         GPIO.output(self.IN1, GPIO.LOW)
