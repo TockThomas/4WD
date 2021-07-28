@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 
 
 class Buzzer:
-    def __init(self):
+    def __init__(self):
         # Buzzer-Pin
         self.buzzer = 8
 
