@@ -36,8 +36,8 @@ class Car:
     def brake(self):
         self.tire.brake()
 
-    def led(self):
+    def ledSwitch(self):
         self.led.led()
 
-    def servo(self, arg):
+    def servoMove(self, arg):
         self.servo.servo(arg)
