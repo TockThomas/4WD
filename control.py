@@ -40,10 +40,10 @@ def start():
                         car.back()
                 else:
                     car.brake()
-                """if keys["e"]:
+                if keys["e"]:
                     car.buzzerOn()
                 else:
-                    car.buzzerOff()"""
+                    car.buzzerOff()
                 if keys["f"]:
                     car.ledSwitch()
                 elif keys["ArrowUp"]:
