@@ -80,10 +80,8 @@ class Tire:
         self.ENA_PWM.ChangeDutyCycle(speed)
         self.ENB_PWM.ChangeDutyCycle(speed)
 
-    def brake(self, speed=20):
+    def brake(self):
         GPIO.output(self.IN1, GPIO.LOW)
         GPIO.output(self.IN2, GPIO.LOW)
         GPIO.output(self.IN3, GPIO.LOW)
         GPIO.output(self.IN4, GPIO.LOW)
-        self.ENA_PWM.ChangeDutyCycle(speed)
-        self.ENB_PWM.ChangeDutyCycle(speed)
