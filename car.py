@@ -8,6 +8,7 @@ import time
 
 class Car:
     def __init__(self):
+        GPIO.setmode(GPIO.BCM)
         self.tire = Tire.Tire()
 
     def run(self, speed=20):
