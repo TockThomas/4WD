@@ -19,7 +19,7 @@ class Servo:
         self.servo_x = 6.5
         self.servo_y = 7.5
         self.servo_z = 6
-        self.reset()
+        self.start()
 
     def servo_start(self):
         self.servo1.start(self.servo_z)
@@ -27,17 +27,18 @@ class Servo:
         self.servo3.start(self.servo_x)
         self.servo_move()
 
-    def servo_move_x(self):
-        self.servo3.ChangeDutyCycle(self.servo_x)
+    def servo_move(self, pRotation="all"):
+        if pRotation == "all" or pRotation == "left" or pRotation == "right":
+            self.servo1.ChangeDutyCycle(self.servo_z)
+            self.servo2.ChangeDutyCycle(self.servo_y)
+        if pRotation == "all" or pRotation == "up" or pRotation == "down":
+            self.servo3.ChangeDutyCycle(self.servo_x)
         time.sleep(0.25)
-        self.servo3.ChangeDutyCycle(0)
-
-    def servo_move_y(self):
-        self.servo1.ChangeDutyCycle(self.servo_z)
-        self.servo2.ChangeDutyCycle(self.servo_y)
-        time.sleep(0.25)
-        self.servo1.ChangeDutyCycle(0)
-        self.servo2.ChangeDutyCycle(0)
+        if pRotation == "all" or pRotation == "left" or pRotation == "right":
+            self.servo1.ChangeDutyCycle(0)
+            self.servo2.ChangeDutyCycle(0)
+        if pRotation == "all" or pRotation == "up" or pRotation == "down":
+            self.servo3.ChangeDutyCycle(0)
 
     def servo(self, arg):
         print("servo")
@@ -45,12 +46,10 @@ class Servo:
             self.servo_x += 0.5
             if self.servo_x > 11:
                 self.servo_x = 11
-            self.servo_move_x()
         elif arg == "down":
             self.servo_x -= 0.5
             if self.servo_x < 4:
                 self.servo_x = 4
-            self.servo_move_x()
         elif arg == "left":
             self.servo_y += 1
             self.servo_z += 1
@@ -58,7 +57,6 @@ class Servo:
                 self.servo_y = 12.5
             if self.servo_z > 11:
                 self.servo_z = 11
-            self.servo_move_y()
         elif arg == "right":
             self.servo_y -= 1
             self.servo_z -= 1
@@ -66,7 +64,7 @@ class Servo:
                 self.servo_y = 3.5
             if self.servo_z < 2:
                 self.servo_z = 2
-            self.servo_move_y()
+        self.servo_move(arg)
 
     def reset(self):
         self.servo_x = 6.5
