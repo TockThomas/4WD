@@ -6,7 +6,6 @@ try:
     import Car.Buzzer as Buzzer
 except:
     print("Raspberry Pi nicht erkannt")
-import time
 
 
 class Car:
@@ -17,29 +16,29 @@ class Car:
         self.servo = Servo.Servo()
         self.buzzer = Buzzer.Buzzer()
 
-    def run(self, speed=20):
-        self.tire.run(speed)
+    def driveForward(self):
+        self.tire.forward()
 
-    def left(self, speed=20):
-        self.tire.left(speed)
+    def driveForwardLeft(self):
+        self.tire.forwardLeft()
 
-    def right(self, speed=20):
-        self.tire.right(speed)
+    def driveForwardRight(self):
+        self.tire.forwardRight()
 
-    def back_right(self, speed=20):
-        self.tire.back_right(speed)
+    def driveBackwardRight(self):
+        self.tire.backwardRight()
 
-    def back_left(self, speed=20):
-        self.tire.back_left(speed)
+    def driveBackwardLeft(self):
+        self.tire.backwardLeft()
 
-    def back(self, speed=20):
-        self.tire.back(speed)
+    def driveBackward(self):
+        self.tire.backward()
 
-    def brake(self):
-        self.tire.brake()
+    def driveStop(self):
+        self.tire.stop()
 
-    def ledSwitch(self):
-        self.led.led()
+    def led(self):
+        self.led.changeLed()
 
     def servoMove(self, arg):
         self.servo.servo(arg)
@@ -49,3 +48,6 @@ class Car:
 
     def buzzerOff(self):
         self.buzzer.off()
+
+    def shutdown(self):
+        GPIO.cleanup()

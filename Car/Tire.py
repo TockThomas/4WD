@@ -24,28 +24,19 @@ class Tire:
         self.ENB_PWM = GPIO.PWM(self.ENB, 2000)
         self.ENA_PWM.start(0)
         self.ENB_PWM.start(0)
+        self.speed = 20
 
-    def run(self, speed):
+    def forward(self):
         GPIO.output(self.IN1, GPIO.HIGH)
         GPIO.output(self.IN2, GPIO.LOW)
         GPIO.output(self.IN3, GPIO.HIGH)
         GPIO.output(self.IN4, GPIO.LOW)
-        self.ENA_PWM.ChangeDutyCycle(speed)
-        self.ENB_PWM.ChangeDutyCycle(speed)
+        self.ENA_PWM.ChangeDutyCycle(self.speed)
+        self.ENB_PWM.ChangeDutyCycle(self.speed)
 
-    def left(self, speed):
-        ENA = 1 * speed / 20
-        ENB = 30 * speed / 20
-        GPIO.output(self.IN1, GPIO.HIGH)
-        GPIO.output(self.IN2, GPIO.LOW)
-        GPIO.output(self.IN3, GPIO.HIGH)
-        GPIO.output(self.IN4, GPIO.LOW)
-        self.ENA_PWM.ChangeDutyCycle(ENA)
-        self.ENB_PWM.ChangeDutyCycle(ENB)
-
-    def right(self, speed):
-        ENA = 30 * speed / 20
-        ENB = 1 * speed / 20
+    def forwardLeft(self):
+        ENA = 1 * self.speed / 20
+        ENB = 30 * self.speed / 20
         GPIO.output(self.IN1, GPIO.HIGH)
         GPIO.output(self.IN2, GPIO.LOW)
         GPIO.output(self.IN3, GPIO.HIGH)
@@ -53,9 +44,19 @@ class Tire:
         self.ENA_PWM.ChangeDutyCycle(ENA)
         self.ENB_PWM.ChangeDutyCycle(ENB)
 
-    def back_right(self, speed):
-        ENA = 30 * speed / 20
-        ENB = 1 * speed / 20
+    def forwardRight(self):
+        ENA = 30 * self.speed / 20
+        ENB = 1 * self.speed / 20
+        GPIO.output(self.IN1, GPIO.HIGH)
+        GPIO.output(self.IN2, GPIO.LOW)
+        GPIO.output(self.IN3, GPIO.HIGH)
+        GPIO.output(self.IN4, GPIO.LOW)
+        self.ENA_PWM.ChangeDutyCycle(ENA)
+        self.ENB_PWM.ChangeDutyCycle(ENB)
+
+    def backwardRight(self):
+        ENA = 30 * self.speed / 20
+        ENB = 1 * self.speed / 20
         GPIO.output(self.IN1, GPIO.LOW)
         GPIO.output(self.IN2, GPIO.HIGH)
         GPIO.output(self.IN3, GPIO.LOW)
@@ -63,9 +64,9 @@ class Tire:
         self.ENA_PWM.ChangeDutyCycle(ENA)
         self.ENB_PWM.ChangeDutyCycle(ENB)
 
-    def back_left(self, speed):
-        ENA = 1 * speed / 20
-        ENB = 30 * speed / 20
+    def backwardLeft(self):
+        ENA = 1 * self.speed / 20
+        ENB = 30 * self.speed / 20
         GPIO.output(self.IN1, GPIO.LOW)
         GPIO.output(self.IN2, GPIO.HIGH)
         GPIO.output(self.IN3, GPIO.LOW)
@@ -73,15 +74,15 @@ class Tire:
         self.ENA_PWM.ChangeDutyCycle(ENA)
         self.ENB_PWM.ChangeDutyCycle(ENB)
 
-    def back(self, speed):
+    def backward(self):
         GPIO.output(self.IN1, GPIO.LOW)
         GPIO.output(self.IN2, GPIO.HIGH)
         GPIO.output(self.IN3, GPIO.LOW)
         GPIO.output(self.IN4, GPIO.HIGH)
-        self.ENA_PWM.ChangeDutyCycle(speed)
-        self.ENB_PWM.ChangeDutyCycle(speed)
+        self.ENA_PWM.ChangeDutyCycle(self.speed)
+        self.ENB_PWM.ChangeDutyCycle(self.speed)
 
-    def brake(self):
+    def stop(self):
         GPIO.output(self.IN1, GPIO.LOW)
         GPIO.output(self.IN2, GPIO.LOW)
         GPIO.output(self.IN3, GPIO.LOW)

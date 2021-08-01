@@ -12,10 +12,10 @@ class Led:
         GPIO.setup(self.LED_R, GPIO.OUT)
         GPIO.setup(self.LED_G, GPIO.OUT)
         GPIO.setup(self.LED_B, GPIO.OUT)
-        self.ledstatus = False
+        self.led_status = False
 
-    def led(self):
-        self.ledstatus = not self.ledstatus
+    def changeLed(self):
+        self.led_status = not self.ledstatus
         if self.ledstatus:
             GPIO.output(self.LED_R, GPIO.HIGH)
             GPIO.output(self.LED_G, GPIO.HIGH)

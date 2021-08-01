@@ -2,6 +2,7 @@ def start():
     import asyncio
     import websockets
     import car
+    import time
 
 
     keys = {
@@ -24,36 +25,13 @@ def start():
             key = await websocket.recv()
             eventKey(key)
             if carstatus:
-                if keys["w"]:
-                    if keys["a"]:
-                        car.left()
-                    elif keys["d"]:
-                        car.right()
-                    else:
-                        car.run()
-                elif keys["s"]:
-                    if keys["a"]:
-                        car.back_left()
-                    elif keys["d"]:
-                        car.back_right()
-                    else:
-                        car.back()
-                else:
-                    car.brake()
-                if keys["e"]:
-                    car.buzzerOn()
-                else:
-                    car.buzzerOff()
-                if keys["f"]:
-                    car.ledSwitch()
-                elif keys["ArrowUp"]:
-                    car.servoMove("up")
-                elif keys["ArrowDown"]:
-                    car.servoMove("down")
-                elif keys["ArrowLeft"]:
-                    car.servoMove("left")
-                elif keys["ArrowRight"]:
-                    car.servoMove("right")
+                try:
+                    carHandler()
+                except:
+                    carError()
+            else:
+                print(key)
+
 
     def eventKey(key):
         try:
@@ -65,6 +43,7 @@ def start():
                 keyArrow(key)
         except:
             print("falsche Taste")
+            pass
 
     def keyArrow(key):
         if key == "ArrowUp,true":
@@ -84,15 +63,58 @@ def start():
         elif key == "ArrowRight,false":
             keys["ArrowRight"] = False
 
+    def carHandler():
+        if keys["w"]:
+            if keys["a"]:
+                car.driveForwardLeft()
+            elif keys["d"]:
+                car.driveForwardRight()
+            else:
+                car.driveForward()
+        elif keys["s"]:
+            if keys["a"]:
+                car.driveBackwardLeft()
+            elif keys["d"]:
+                car.driveBackwardRight()
+            else:
+                car.driveBackward()
+        else:
+            car.driveStop()
+        if keys["e"]:
+            car.buzzerOn()
+        else:
+            car.buzzerOff()
+        if keys["f"]:
+            car.led()
+        elif keys["ArrowUp"]:
+            car.servoMove("up")
+        elif keys["ArrowDown"]:
+            car.servoMove("down")
+        elif keys["ArrowLeft"]:
+            car.servoMove("left")
+        elif keys["ArrowRight"]:
+            car.servoMove("right")
+
+    def carError():
+        car.driveStop()
+        # car.servoReset()
+        car.led() #red
+        car.buzzerOn()
+        time.sleep(2)
+        car.led() #off
+        car.buzzerOff()
+        car.shutdown
+
+
     print("-- Starting 4WD --")
     car = car.Car()
-    carstatus = True
-    """try:
+    try:
         car = car.Car()
         carstatus = True
     except:
         print("Auto nicht verfügbar.")
-        carstatus = False"""
+        carstatus = False
+        pass
     start_server = websockets.serve(keyHandler, "0.0.0.0", 5678)
 
     asyncio.get_event_loop().run_until_complete(start_server)
