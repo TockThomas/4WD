@@ -25,7 +25,7 @@ class Servo:
         self.servo1.start(self.z)
         self.servo2.start(self.y)
         self.servo3.start(self.x)
-        self.servo_move()
+        self.move()
 
     def move(self, pRotation="all"):
         if pRotation == "all" or pRotation == "left" or pRotation == "right":
