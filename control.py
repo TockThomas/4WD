@@ -13,6 +13,7 @@ def start():
             "d": False,
             "f": False,
             "e": False,
+            "r": False,
             "ArrowUp": False,
             "ArrowDown": False,
             "ArrowLeft": False,
@@ -100,10 +101,13 @@ def start():
             elif keys["ArrowRight"]:
                 car.servoMove("right")
                 keys["ArrowRight"] = False
+            elif keys["r"]:
+                car.servoReset()
+                keys["r"] = False
 
         def carError():
             car.driveStop()
-            # car.servoReset()
+            car.servoReset()
             car.changeLed() #red
             car.buzzerOn()
             time.sleep(2)

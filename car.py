@@ -44,6 +44,9 @@ class Car:
     def servoMove(self, arg):
         self.servo.servo(arg)
 
+    def servoReset(self):
+        self.servo.reset()
+
     def buzzerOn(self):
         self.buzzer.on()
 
