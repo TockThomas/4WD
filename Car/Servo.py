@@ -41,7 +41,6 @@ class Servo:
             self.servo3.ChangeDutyCycle(0)
 
     def servo(self, arg):
-        print("servo")
         if arg == "up":
             self.x += 0.5
             if self.x > 11:
