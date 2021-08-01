@@ -17,8 +17,8 @@ class Servo:
         self.servo2 = GPIO.PWM(self.servoPIN2, 50)
         self.servo3 = GPIO.PWM(self.servoPIN3, 50)
         self.x = 6.5
-        self.y = 7.5
-        self.z = 6
+        self.y = 6.5
+        self.z = 6.5
         self.start()
 
     def start(self):
@@ -67,8 +67,8 @@ class Servo:
 
     def reset(self):
         self.x = 6.5
-        self.y = 7.5
-        self.z = 6
+        self.y = 6.5
+        self.z = 6.5
         self.servo1.ChangeDutyCycle(self.z)
         self.servo2.ChangeDutyCycle(self.y)
         self.servo2.ChangeDutyCycle(self.x)
