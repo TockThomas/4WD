@@ -87,14 +87,19 @@ def start():
                 car.buzzerOff()
             if keys["f"]:
                 car.changeLed()
+                keys["f"] = False
             elif keys["ArrowUp"]:
                 car.servoMove("up")
+                keys["ArrowUp"] = False
             elif keys["ArrowDown"]:
                 car.servoMove("down")
+                keys["ArrowDown"] = False
             elif keys["ArrowLeft"]:
                 car.servoMove("left")
+                keys["ArrowLeft"] = False
             elif keys["ArrowRight"]:
                 car.servoMove("right")
+                keys["ArrowRight"] = False
 
         def carError():
             car.driveStop()
