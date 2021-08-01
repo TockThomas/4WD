@@ -19,7 +19,7 @@ class Servo:
         self.servo_x = 6.5
         self.servo_y = 7.5
         self.servo_z = 6
-        self.servo_start()
+        self.reset()
 
     def servo_start(self):
         self.servo1.start(self.servo_z)
@@ -40,6 +40,7 @@ class Servo:
         self.servo2.ChangeDutyCycle(0)
 
     def servo(self, arg):
+        print("servo")
         if arg == "up":
             self.servo_x += 0.5
             if self.servo_x > 11:
