@@ -108,7 +108,6 @@ def start():
 
 
         print("-- Starting 4WD --")
-        car = car.Car()
         try:
             car = car.Car()
             carstatus = True
