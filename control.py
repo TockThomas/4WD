@@ -85,7 +85,7 @@ def start():
         else:
             car.buzzerOff()
         if keys["f"]:
-            car.led()
+            car.changeLed()
         elif keys["ArrowUp"]:
             car.servoMove("up")
         elif keys["ArrowDown"]:
@@ -98,10 +98,10 @@ def start():
     def carError():
         car.driveStop()
         # car.servoReset()
-        car.led() #red
+        car.changeLed() #red
         car.buzzerOn()
         time.sleep(2)
-        car.led() #off
+        car.changeLed() #off
         car.buzzerOff()
         car.shutdown
 

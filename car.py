@@ -11,6 +11,7 @@ except:
 class Car:
     def __init__(self):
         GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
         self.tire = Tire.Tire()
         self.led = Led.Led()
         self.servo = Servo.Servo()
@@ -37,7 +38,7 @@ class Car:
     def driveStop(self):
         self.tire.stop()
 
-    def led(self):
+    def changeLed(self):
         self.led.changeLed()
 
     def servoMove(self, arg):
