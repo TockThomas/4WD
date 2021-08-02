@@ -38,8 +38,8 @@ class Car:
     def driveStop(self):
         self.tire.stop()
 
-    def changeLed(self):
-        self.led.changeLed()
+    def changeLed(self, pLed):
+        self.led.changeLed(pLed)
 
     def servoMove(self, arg):
         self.servo.servo(arg)

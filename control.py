@@ -20,7 +20,6 @@ def start():
             "ArrowRight": False
         }
 
-
         async def keyHandler(websocket, path):
             while True:
                 #Steuerung
@@ -42,12 +41,12 @@ def start():
                 elif key[2] == "f":
                     keys[key[0]] = False
                 else:
-                    keyArrow(key)
+                    specialKey(key)
             except:
                 print("falsche Taste")
                 pass
 
-        def keyArrow(key):
+        def specialKey(key):
             if key == "ArrowUp,true":
                 keys["ArrowUp"] = True
             elif key == "ArrowUp,false":
@@ -64,6 +63,18 @@ def start():
                 keys["ArrowRight"] = True
             elif key == "ArrowRight,false":
                 keys["ArrowRight"] = False
+            elif key == "red,true":
+                car.changeLed(["red", True])
+            elif key == "red,false":
+                car.changeLed(["red", False])
+            elif key == "green,true":
+                car.changeLed(["green", True])
+            elif key == "green,false":
+                car.changeLed(["green", False])
+            elif key == "blue,true":
+                car.changeLed(["blue", True])
+            elif key == "blue,false":
+                car.changeLed(["blue", False])
 
         def carHandler():
             if keys["w"]:
@@ -108,10 +119,14 @@ def start():
         def carError():
             car.driveStop()
             car.servoReset()
-            car.changeLed() #red
+            car.changeLed(["red", True])
+            car.changeLed(["green", False])
+            car.changeLed(["blue", False])
             car.buzzerOn()
             time.sleep(2)
-            car.changeLed() #off
+            car.changeLed(["red", False])
+            car.changeLed(["green", False])
+            car.changeLed(["blue", False])
             car.buzzerOff()
             car.shutdown
 
