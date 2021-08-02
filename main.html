@@ -11,16 +11,26 @@
                 <div class="info">
                     <h1 class="info__title">Information</h1>
                     <h2 class="info__subtitle">Controls</h2>
-                    WASD - Move
-                    F - Lights on/off
-                    E - Buzzer
-                    ArrowKeys - Move the camera
+                    WASD - Move<br/>
+                    ArrowKeys - Move the camera<br/>
+                    F - Lights on/off<br/>
+                    E - Buzzer<br/>
+                    R - Camera-position reset<br/>
                     <h2 class="info__subtitle">Status</h2>
                     Test: CPU 05%
                 </div>
             </div>
             <div class="controlpanel">
-                Test
+                <div class="controlpanel__led">
+                    <div class="controlpanel__led__title">
+                        LED
+                    </div>
+                    <div class="controlpanel__led__buttons">
+                        <button id="led_red" class="controlpanel__led__button controlpanel__led__red" onclick="led_change('red')">R</button>
+                        <button id="led_green" class="controlpanel__led__button controlpanel__led__green" onclick="led_change('green')">G</button>
+                        <button id="led_blue" class="controlpanel__led__button controlpanel__led__blue" onclick="led_change('blue')">B</button>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
@@ -37,6 +47,11 @@
             "ArrowDown": false,
             "ArrowLeft": false,
             "ArrowRight": false
+        }
+        var activeLed = {
+            "red": false,
+            "green": false,
+            "blue": false
         }
         wscam.binaryType = "arraybuffer";
         document.addEventListener("keydown", keyDown);
@@ -63,6 +78,20 @@
             var bytes = new Uint8Array(arrayBuffer);
             var image = document.getElementById("image");
             image.src = 'data:image/jpg;base64,' + encode(bytes);
+        }
+
+        function led_change(pColor) {
+            activeLed[pColor] = !activeLed[pColor];
+            var button = document.getElementById("led_" + pColor);
+            if(activeLed[pColor]) {
+                button.style.backgroundColor = pColor;
+                button.style.borderColor = "black"
+            } else {
+                button.style.backgroundColor = "white";
+                button.style.borderColor = pColor;
+            }
+            console.log([pColor, activeLed[pColor]]);
+            ws.send([pColor, activeLed[pColor]]);
         }
 
         function encode (input) {

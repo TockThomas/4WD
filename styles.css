@@ -34,8 +34,7 @@
     flex-direction: column;
     background-color: grey;
     padding: 10px 10px;
-    margin-top: 10px;
-    margin-right: 10px;
+    margin: 10px 10px;
     border: 2px solid black;
     border-radius: 12px;
     height: 460px;
@@ -58,4 +57,59 @@
     background-color: #383838;
     border: 5px solid black;
     width: 1080px;
+}
+
+.controlpanel__led {
+    display: flex;
+    flex-direction: column;
+    background-color: grey;
+    padding: 10px 10px;
+    margin: 10px 10px;
+    border: 2px solid black;
+    border-radius: 12px;
+}
+
+.controlpanel__led__title {
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 1.17em;
+    font-weight: bold;
+}
+
+.controlpanel__led__buttons {
+    display: flex;
+}
+
+.controlpanel__led__button {
+    font-size: 20px;
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    margin: 5px 5px;
+    background-color: white;
+    transition-duration: 0.4s;
+}
+
+.controlpanel__led__red {
+    border: 2px solid red;
+}
+
+.controlpanel__led__red:hover {
+    background-color: lightcoral;
+}
+
+.controlpanel__led__green {
+    border: 2px solid green;
+}
+
+.controlpanel__led__green:hover {
+    background-color: lightgreen;
+}
+
+.controlpanel__led__blue {
+    border: 2px solid blue;
+}
+
+.controlpanel__led__blue:hover {
+    background-color: lightblue;
 }
