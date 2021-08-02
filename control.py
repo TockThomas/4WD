@@ -119,10 +119,14 @@ def start():
         def carError():
             car.driveStop()
             car.servoReset()
-            car.changeLed() #red
+            car.changeLed(["red", True])
+            car.changeLed(["green", False])
+            car.changeLed(["blue", False])
             car.buzzerOn()
             time.sleep(2)
-            car.changeLed() #off
+            car.changeLed(["red", False])
+            car.changeLed(["green", False])
+            car.changeLed(["blue", False])
             car.buzzerOff()
             car.shutdown
 
@@ -143,4 +147,3 @@ def start():
         asyncio.get_event_loop().run_forever()
     except KeyboardInterrupt:
         carError()
-start()
